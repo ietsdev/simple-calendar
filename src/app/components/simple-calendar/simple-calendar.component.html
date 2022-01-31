@@ -1,0 +1,40 @@
+<div id="calendar-ds" class="calendar">
+    <div class="calendar-month">
+      <div clas>
+        <ul class="list-inline m-0">
+          <li class="list-inline-item col-2 m-0"><a (click)="prev()" class="btn btn-outline-light d-block btn-prev-month"><</a></li>
+          <li class="list-inline-item col-8 m-0 text-center"><span class="text-capitalize">{{currentDate.toLocaleDateString('es-CL', { month: 'long' })}} - {{currentDate.getFullYear()}}</span></li>
+          <li class="list-inline-item col-2 m-0"><a (click)="next()" class="btn btn-outline-light d-block btn-next-month">></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="calendar-innerContainer">
+      <div class="calendar-rContainer">
+        <div class="calendar-weekdays">
+          <div class="calendar-weekdaycontainer">
+            <ng-container *ngFor="let day of daysNames;">
+              <span class="calendar-weekday">{{day.shortName}}</span>
+            </ng-container>
+          </div>
+        </div>
+        <div class="calendar-days">
+          <div class="calendar-dayContainer">
+            <ng-container *ngFor="let calendarWeek of currentDays; let i = index">
+              <ng-container *ngIf="calendarWeek.show">              
+                <span *ngFor="let dia of calendarWeek.days" 
+                      [ngClass]="[dia.isOpaque ? 'calendar-day-color-prev-next-month' : 'calendar-day-color-default', dia.isSelected ? 'day-selected': '']"
+                      [attr.data-bs-toggle]="dia.isSelected ? 'popover' : null"
+                      [attr.data-bs-trigger]="dia.isSelected ? 'hover' : null"
+                      [attr.data-bs-content]="dia.isSelected ? '<p>test</p>' : null"
+                      [attr.data-bs-placement]="dia.isSelected ? 'bottom' : null"
+                >
+                      {{dia.numero}}
+                </span>
+              </ng-container>           
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
